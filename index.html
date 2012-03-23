@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+
+	<meta name="author" content="Eberhard Gräther">
+	<meta name="description" content="WebGL workshop for FH-Salzburg Barcamp 2012">
+
+	<title>WebGL workshop</title>
+
+	<style type="text/css">
+
+		#canvas {
+			width : 100%;
+			height : 100%;
+			position : fixed;
+			top : 0px;
+			left : 0px;
+			z-index : -1;
+			background-color : #FAA;
+		}
+
+		#error {
+			display : none;
+		}
+
+	</style>
+
+</head>
+<body>
+
+	<div id="error">
+		WebGL does not work in your browser. Find out why at 
+		<a href="http://get.webgl.org">http://get.webgl.org</a>
+	</div>
+
+	<canvas id="canvas"></canvas>
+
+	<!-- 
+		vertex shader:
+		- processes attribute variables to define the position of each vertex
+	-->
+
+	<script id="vertex-shader-script" type="x-shader/x-vertex" charset="utf-8">
+
+		/**
+			uniforms: defined for all vertices
+		*/
+
+
+		/**
+			attributes: defined for each vertex
+		*/
+
+
+		/**
+			varyings: 
+			- send data to the fragment shader
+			- gets interpolated for fragments between vertices
+		*/
+
+
+		/**
+			main: needs to set 'gl_Position'
+		*/
+
+		void main( void ) {
+
+		}
+
+	</script>
+
+
+	<!-- 
+		fragment shader:
+		- sets the color of each pixel
+	-->
+
+	<script id="fragment-shader-script" type="x-shader/x-fragment" charset="utf-8">
+
+		/**
+			necessary for whatever reason
+		*/
+
+		precision mediump float;
+
+
+		/**
+			uniforms: defined for all fragments
+		*/
+
+
+		/**
+			varyings: sent from the vertex shader
+		*/
+
+
+		/**
+			main: needs to set 'gl_FragColor'
+		*/
+
+		void main(void) {
+
+		}
+
+	</script>
+
+	<script type="text/javascript" charset="utf-8" src="lib/requestAnimationFrame.js"></script>
+	<script type="text/javascript" charset="utf-8" src="lib/glMatrix.js"></script>
+
+	<script type="text/javascript" charset="utf-8" src="src/utilities.js"></script>
+	<script type="text/javascript" charset="utf-8" src="src/WebGLUtilities.js"></script>
+
+	<script type="text/javascript" charset="utf-8" src="src/TrackballCamera.js"></script>
+
+	<script type="text/javascript" charset="utf-8" src="src/Geometry.js"></script>
+	<script type="text/javascript" charset="utf-8" src="src/Mesh.js"></script>
+	<script type="text/javascript" charset="utf-8" src="src/Shader.js"></script>
+	<script type="text/javascript" charset="utf-8" src="src/Scene.js"></script>
+
+	<script type="text/javascript" charset="utf-8" src="src/main.js"></script>
+
+	<script type="text/javascript" charset="utf-8">
+
+		window.onload = function() {
+
+			main();
+
+		};
+
+	</script>
+
+</body>
+</html>
