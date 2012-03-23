@@ -132,14 +132,6 @@ function run() {
 
 
 	/**
-		clear the color of the canvas to the defined 'gl.clearColor()'
-		and clear the depth buffer
-	*/
-
-	gl.clear( gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT );
-
-
-	/**
 		render the scene
 	*/
 

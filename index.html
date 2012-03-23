@@ -16,7 +16,7 @@
 			top : 0px;
 			left : 0px;
 			z-index : -1;
-			background-color : #FAA;
+			background-color : #AAA;
 		}
 
 		#error {
@@ -46,10 +46,21 @@
 			uniforms: defined for all vertices
 		*/
 
+		uniform mat4 uProjectionMatrix;
+		uniform mat4 uModelViewMatrix;
+
+		uniform vec3 uAmbientLightColor;
+
+		uniform vec3 uDirectionalLightColor;
+		uniform vec3 uDirectionalLightDirection;
+
 
 		/**
 			attributes: defined for each vertex
 		*/
+
+		attribute vec3 aVertex;
+		attribute vec3 aNormal;
 
 
 		/**
@@ -58,12 +69,20 @@
 			- gets interpolated for fragments between vertices
 		*/
 
+		varying vec3 vLight;
+
 
 		/**
 			main: needs to set 'gl_Position'
 		*/
 
 		void main( void ) {
+
+			gl_Position = uProjectionMatrix * uModelViewMatrix * vec4( aVertex, 1.0 );
+
+			float directionalLightIntensity = dot( aNormal, normalize( uDirectionalLightDirection ) );
+
+			vLight = uAmbientLightColor + uDirectionalLightColor * directionalLightIntensity;
 
 		}
 
@@ -88,10 +107,14 @@
 			uniforms: defined for all fragments
 		*/
 
+		uniform vec3 uColor;
+
 
 		/**
 			varyings: sent from the vertex shader
 		*/
+
+		varying vec3 vLight;
 
 
 		/**
@@ -99,6 +122,8 @@
 		*/
 
 		void main(void) {
+
+			gl_FragColor = vec4( uColor * vLight, 1.0 );
 
 		}
 

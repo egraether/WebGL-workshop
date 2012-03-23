@@ -60,6 +60,8 @@ var TrackballCamera = {
 		vec3.zero( this.oldMouse );
 		vec3.zero( this.mouse );
 
+		this.isRotating = true;
+
 	},
 
 	update : function() {
@@ -67,16 +69,21 @@ var TrackballCamera = {
 		if ( this.isRotating ) {
 
 			this.rotate();
+			return true;
 
 		} else if ( this.zoomDelta !== 1 ) {
 
 			this.zoom();
+			return true;
 
 		} else if ( this.isPanning ) {
 
 			this.pan();
+			return true;
 
 		}
+
+		return false;
 
 	},
 

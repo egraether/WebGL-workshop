@@ -54,7 +54,23 @@ Geometry.prototype = {
 
 	init : function( gl ) {
 
+		this.vertexBuffer = gl.createBuffer();
 
+		gl.bindBuffer( gl.ARRAY_BUFFER, this.vertexBuffer );
+		gl.bufferData( gl.ARRAY_BUFFER, new Float32Array( this.vertices ), gl.STATIC_DRAW );
+
+		this.normalBuffer = gl.createBuffer();
+
+		gl.bindBuffer( gl.ARRAY_BUFFER, this.normalBuffer);
+		gl.bufferData( gl.ARRAY_BUFFER, new Float32Array( this.normals ), gl.STATIC_DRAW );
+
+
+		this.indexBuffer = gl.createBuffer();
+
+		gl.bindBuffer( gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer);
+		gl.bufferData( gl.ELEMENT_ARRAY_BUFFER, new Uint16Array( this.indices ), gl.STREAM_DRAW );
+
+		this.indexCount = this.indices.length;
 
 	},
 
@@ -67,7 +83,14 @@ Geometry.prototype = {
 
 	draw : function( gl ) {
 
+		gl.bindBuffer( gl.ARRAY_BUFFER, this.vertexBuffer );
+		gl.vertexAttribPointer( Shader.vertexAttribute, 3, gl.FLOAT, false, 0, 0 );
 
+		gl.bindBuffer( gl.ARRAY_BUFFER, this.normalBuffer );
+		gl.vertexAttribPointer( Shader.normalAttribute, 3, gl.FLOAT, false, 0, 0 );
+
+		gl.bindBuffer( gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer );
+		gl.drawElements( gl.TRIANGLES, this.indexCount, gl.UNSIGNED_SHORT, 0 );
 
 	}
 

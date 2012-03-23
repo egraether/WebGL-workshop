@@ -29,22 +29,35 @@ Mesh.prototype = {
 			defined in 'WebGLUtilities.js'
 		*/
 
+		gl.pushMatrix();
+
 
 		/**
 			translate and scale 'gl.matrix' to the specified attributes
 			send 'gl.matrix' as modelViewMatrix and the color to the shader
 		*/
 
+		mat4.translate( gl.matrix, this.position );
+		mat4.scale( gl.matrix, this.scale );
+
+		gl.uniformMatrix4fv( Shader.modelViewMatrixUniform, false, gl.matrix );
+		gl.uniform3fv( Shader.colorUniform, this.color );
+
+
 
 		/**
 			draw the defined geometry
 		*/
+
+		this.geometry.draw( gl );
 
 
 		/**
 			restore 'gl.matrix' and discard the changes
 			defined in 'WebGLUtilities.js'
 		*/
+
+		gl.popMatrix();
 
 	},
 
